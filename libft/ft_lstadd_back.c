@@ -6,7 +6,7 @@
 /*   By: peli <peli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 15:48:26 by peli              #+#    #+#             */
-/*   Updated: 2024/05/15 20:28:00 by peli             ###   ########.fr       */
+/*   Updated: 2024/08/01 16:27:42 by peli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 	return ;
 }
 
-// int main() {
+// int main() 
+// {
 //     /* t_list  *l = malloc(sizeof(t_list) * 1);
 //     char	 contenu1[] = "petsy";
 //     l->content = (void *)(contenu1);
