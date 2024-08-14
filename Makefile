@@ -14,7 +14,8 @@ SRCS =	push_swap.c \
 		$(INSTRUCTION_DIR)/ft_rotate.c\
 		$(INSTRUCTION_DIR)/ft_reverse_rotate.c\
 		trier_trois.c\
-		trier_cinq.c
+		trier_cinq.c\
+		multitrier.c
 
 OBJS = $(SRCS:.c=.o)
 LIBFTMAKE	= $(MAKE) -C $(LIBFTPATH)

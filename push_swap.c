@@ -6,13 +6,12 @@
 /*   By: peli <peli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 14:13:30 by peli              #+#    #+#             */
-/*   Updated: 2024/08/14 11:08:41 by peli             ###   ########.fr       */
+/*   Updated: 2024/08/14 20:08:18 by peli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void free_stack(t_stack *stack);
 static void free_args(char **args);
 //static void	print_stack(t_stack *stack);
 
@@ -76,14 +75,14 @@ int main(int argc, char **argv)
 	fill_stack(&a, array, len);
 	if (len == 3)
 		trier_trois(&a);
-	else if (len == 5)
+	if (len == 5)
 		trier_cinq(&a, &b);
-	else if (len == 100)
-		trier_cent(&a, &b);
-	printf("Stack A :\n");
-	print_stack(a);
-	printf("\nStack B :\n");
-	print_stack(b);
+	if (len > 5)
+		multitrier(&a, &b, len);
+	// printf("Stack A :\n");
+	// print_stack(a);
+	// printf("\nStack B :\n");
+	// print_stack(b);
 	
 	//printf("min is : %d\n", find_min(a));
 
@@ -118,17 +117,17 @@ int main(int argc, char **argv)
 	print_stack(b);
 	printf("min is : %d\n", find_min(a)); */
 	
-	/*
+	/*static void free_stack(t_stack *stack, int len)
 		SORT LIST
 	*/
 
 	free(array);
-	free_stack(a);
-	free_stack(b);
+	free_stack(a,len);
+	// free_stack(b);
 	return (0);
 }
 
-// static void	print_stack(t_stack *stack)
+// static void	print_stack(t_stack *stack)static void free_stack(t_stack *stack, int len)
 // {
 // 	int	i;
 
@@ -155,16 +154,20 @@ static void free_args(char **args)
 	}
 	free(args);
 }
-static void free_stack(t_stack *stack)
+void	free_stack(t_stack *stack, int len)
 {
 	t_stack	*current;
 	t_stack	*next;
+	int	i;
 
 	current = stack;
-	while (current != NULL)
+	i = 0;
+	while (i < len)
 	{
 		next = current->next;
 		free(current);
 		current = next;
+		i++;
 	}
+	return ;
 }
