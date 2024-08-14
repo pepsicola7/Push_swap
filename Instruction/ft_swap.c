@@ -6,11 +6,11 @@
 /*   By: peli <peli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 13:53:43 by peli              #+#    #+#             */
-/*   Updated: 2024/08/08 17:45:48 by peli             ###   ########.fr       */
+/*   Updated: 2024/08/12 16:17:32 by peli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 char	ft_swap(t_stack **stack)
 {
@@ -30,19 +30,21 @@ char	ft_swap(t_stack **stack)
 }
 void	ft_swap_a(t_stack **stack)
 {
-	if(ft_swap(&a) == Success)
-		printf ('sa');
+	if(ft_swap(stack) == Success)
+		printf ("sa\n");
 	return;
 }
 
 void	ft_swap_b(t_stack **stack)
 {
-	if(ft_swap(&b) == Success)
-		printf ('sb');
+	if(ft_swap(stack) == Success)
+		printf ("sb\n");
 	return;
 }
 
 void	ft_swap_ab(t_stack **a, t_stack **b)
 {
-	
+	if(ft_swap(a) == Success && ft_swap(b) == Success)
+		printf ("ss\n");
+	return;
 }

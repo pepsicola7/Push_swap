@@ -3,10 +3,18 @@ CC = cc
 FLAGS = -Wall -Werror -Wextra -fsanitize=address -g
 RM = rm -rf
 LIBFTPATH = ./libft/
-SRCS =	push_swap.c\
-		check_error.c\
-		swap.c\
-		operation.c
+INSTRUCTION_DIR = Instruction
+
+SRCS =	push_swap.c \
+		check_error.c \
+		swap.c \
+		print_stack.c \
+		$(INSTRUCTION_DIR)/ft_swap.c\
+		$(INSTRUCTION_DIR)/ft_push.c\
+		$(INSTRUCTION_DIR)/ft_rotate.c\
+		$(INSTRUCTION_DIR)/ft_reverse_rotate.c\
+		trier_trois.c\
+		trier_cinq.c
 
 OBJS = $(SRCS:.c=.o)
 LIBFTMAKE	= $(MAKE) -C $(LIBFTPATH)

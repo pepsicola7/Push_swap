@@ -6,7 +6,7 @@
 /*   By: peli <peli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 17:26:57 by peli              #+#    #+#             */
-/*   Updated: 2024/08/06 16:29:58 by peli             ###   ########.fr       */
+/*   Updated: 2024/08/13 20:42:29 by peli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,12 @@ void	fill_stack(t_stack **stack, int *array, int len)
 
 	i = 0;
 	current = *stack;
+	
 	while (i < len)
 	{
 		new = create_stack_node(array[i]);
 		if (!new)
-			return;
+			return ;
 		if (!current)
 		{
 			current = new;
@@ -36,6 +37,7 @@ void	fill_stack(t_stack **stack, int *array, int len)
 		{
 			current->next = new;
 			current = current->next;
+			current->next = NULL;
 		}
 		i++;
 	}
@@ -47,7 +49,7 @@ static t_stack	*create_stack_node(int array)
 
 	new = malloc(sizeof(t_stack));
 	if (!new)
-		return (0);
+		return (NULL);
 	new->value = array;
 	new->next = NULL;
 	return (new);

@@ -6,7 +6,7 @@
 /*   By: peli <peli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 14:13:30 by peli              #+#    #+#             */
-/*   Updated: 2024/08/08 13:32:14 by peli             ###   ########.fr       */
+/*   Updated: 2024/08/14 11:08:41 by peli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void free_stack(t_stack *stack);
 static void free_args(char **args);
-static void	print_stack(t_stack *stack);
+//static void	print_stack(t_stack *stack);
 
 int	*create_array(int len, char **argv)
 {
@@ -74,6 +74,20 @@ int main(int argc, char **argv)
 	b = NULL;
 	
 	fill_stack(&a, array, len);
+	if (len == 3)
+		trier_trois(&a);
+	else if (len == 5)
+		trier_cinq(&a, &b);
+	else if (len == 100)
+		trier_cent(&a, &b);
+	printf("Stack A :\n");
+	print_stack(a);
+	printf("\nStack B :\n");
+	print_stack(b);
+	
+	//printf("min is : %d\n", find_min(a));
+
+
 	// ft_swap(&a, 'a'); //swap a;
 	//ft_swap(&b, 'b'); //swap b;
 	// ft_push(&b, &a, 'b');//push b
@@ -84,36 +98,51 @@ int main(int argc, char **argv)
 	// ft_rotate(&b, 'b');//rotate b
 	//ft_reverse_rotate(&a, 'a'); //reverse rotate a;
 	// ft_reverse_rotate(&b, 'b'); //reverse retote b;
-	printf("Stack A :\n");
+	// ft_swap_a(&a);
+	// ft_swap_b(&b);
+	// ft_push_a(&a, &b);
+	// ft_push_a(&a, &b);
+	// ft_push_a(&a, &b);
+	// ft_push_a(&a, &b);
+	//ft_push_b(&b, &a);
+	// ft_swap_ab(&a, &b);
+	//ft_rotate_a(&a);
+	//ft_rotate_b(&b);
+	// ft_rotate_ab(&a, &b);
+	//ft_reverse_rotate_a (&a);
+	//ft_reverse_rotate_b (&b);
+	//ft_reverse_rotate_ab (&a, &b);
+	/* printf("Stack A :\n");
 	print_stack(a);
 	printf("\nStack B :\n");
 	print_stack(b);
+	printf("min is : %d\n", find_min(a)); */
 	
 	/*
 		SORT LIST
 	*/
 
 	free(array);
-	free_stack (b);
-	free_stack (a);
+	free_stack(a);
+	free_stack(b);
 	return (0);
 }
 
-static void	print_stack(t_stack *stack)
-{
-	int	i;
+// static void	print_stack(t_stack *stack)
+// {
+// 	int	i;
 
-	i = 0;
-	if (!stack)
-		return;
-	while (stack)
-	{
-		printf("i%d Stack est : %d\n", i, stack->value);
-		stack = stack->next;
-		i++;
-	}
-	return;
-}
+// 	i = 0;
+// 	if (!stack)
+// 		return;
+// 	while (stack)
+// 	{
+// 		printf("i%d Stack est : %d\n", i, stack->value);
+// 		stack = stack->next;
+// 		i++;
+// 	}
+// 	return;
+// }
 static void free_args(char **args)
 {
 	int	i;

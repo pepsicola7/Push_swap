@@ -6,7 +6,7 @@
 /*   By: peli <peli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 19:36:11 by peli              #+#    #+#             */
-/*   Updated: 2024/08/05 18:03:16 by peli             ###   ########.fr       */
+/*   Updated: 2024/08/13 18:14:04 by peli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,14 @@ static long	ft_atol(const char *nptr)
 
 	result = 0;
 	sign = 1;
+	if(ft_strlen(nptr) > 11)
+		return ((long)INT_MAX + 1);
 	while ((*nptr >= 9 && *nptr <= 13) || (*nptr == 32))
-	{
 		nptr++;
-	}
 	if (*nptr == '-' || *nptr == '+')
 	{
 		if (*nptr == '-')
-		{
 			sign = -1;
-		}
 		nptr++;
 	}
 	while (*nptr >= '0' && *nptr <= '9')

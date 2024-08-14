@@ -6,7 +6,7 @@
 /*   By: peli <peli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 14:14:04 by peli              #+#    #+#             */
-/*   Updated: 2024/08/08 17:17:21 by peli             ###   ########.fr       */
+/*   Updated: 2024/08/14 11:14:30 by peli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,27 @@ typedef struct s_stack
 {
 	int				value;
 	struct s_stack	*next;
+	struct s_stack	*prev;
 }	t_stack;
 
 int		check_error(int len, char **args);
 void	fill_stack(t_stack **stack, int *array, int len);
-void	ft_push(t_stack **a, t_stack **b, char c);
-void	ft_swap(t_stack **stack, char c);
-void	ft_rotate(t_stack **stack, char c);
-void	ft_reverse_rotate(t_stack **stack, char c);
-//int	pop(t_stack *stack);
-
+char	ft_swap(t_stack **stack);
+void	ft_swap_a(t_stack **stack);
+void	ft_swap_b(t_stack **stack);
+void	ft_swap_ab(t_stack **a, t_stack **b);
+void	ft_push_a(t_stack **a, t_stack **b);
+void	ft_push_b(t_stack **b, t_stack **a);
+char	ft_rotate(t_stack **stack);
+void	ft_rotate_a(t_stack **stack);
+void	ft_rotate_b(t_stack **stack);
+void	ft_rotate_ab(t_stack **a, t_stack **b);
+char	ft_reverse_rotate(t_stack **stack);
+void	ft_reverse_rotate_a(t_stack **stack);
+void	ft_reverse_rotate_b(t_stack **stack);
+void	ft_reverse_rotate_ab(t_stack **a, t_stack **b);
+void	print_stack(t_stack *stack);
+void	trier_trois(t_stack **a);
+int		find_min(t_stack *stack);
+void	trier_cinq(t_stack **a, t_stack **b);
 #endif
