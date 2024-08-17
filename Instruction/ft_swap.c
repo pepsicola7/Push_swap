@@ -6,7 +6,7 @@
 /*   By: peli <peli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 13:53:43 by peli              #+#    #+#             */
-/*   Updated: 2024/08/12 16:17:32 by peli             ###   ########.fr       */
+/*   Updated: 2024/08/17 17:15:47 by peli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,19 @@ char	ft_swap(t_stack **stack)
 {
 	if(!*stack)
 		return (Failure);
-	t_stack	*temps;
+	t_stack	*second;
 	t_stack	*first;
-	
-	temps = *stack;
-	*stack = (*stack)->next;
+	t_stack	*last;
 
-	first = *stack;
-	temps->next = first->next;
-	first->next = temps;
+	second = *stack;
+	first = (*stack)->next;
+	last = (*stack)->prev;
+
+	second->next = first->next;
+	second->prev = first;
+	first->prev = last;
+	first->next = second;
+	last->next = first;
 	*stack = first;
 	return(Success);
 }

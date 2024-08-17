@@ -6,7 +6,7 @@
 /*   By: peli <peli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 14:14:04 by peli              #+#    #+#             */
-/*   Updated: 2024/08/14 20:06:26 by peli             ###   ########.fr       */
+/*   Updated: 2024/08/17 18:10:51 by peli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ void	ft_reverse_rotate_b(t_stack **stack);
 void	ft_reverse_rotate_ab(t_stack **a, t_stack **b);
 void	print_stack(t_stack *stack);
 void	trier_trois(t_stack **a);
-int		find_min(t_stack *stack);
-void	trier_cinq(t_stack **a, t_stack **b);
+int		find_min(t_stack *stack, int len);
+void	trier_cinq(t_stack **a, t_stack **b, int len);
 void	multitrier(t_stack **a, t_stack **b, int len);
-void	free_stack(t_stack *stack, int len);
+void	free_stack(t_stack *stack);
 #endif

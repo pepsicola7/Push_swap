@@ -6,7 +6,7 @@
 /*   By: peli <peli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 17:26:57 by peli              #+#    #+#             */
-/*   Updated: 2024/08/14 19:49:15 by peli             ###   ########.fr       */
+/*   Updated: 2024/08/17 18:07:04 by peli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	fill_stack(t_stack **stack, int *array, int len)
 		{
 			current = new;
 			*stack = current;
-			new->prev = current;
+			new->prev = NULL;
 		}
 		else
 		{
@@ -45,6 +45,7 @@ void	fill_stack(t_stack **stack, int *array, int len)
 	}
 	current->next = *stack;// ou = head ici; verifier a la fin;
 	(*stack)->prev = current;
+	printf("stack0 is : %d\n", (*stack)->value);
 	return ;
 }
 
@@ -60,19 +61,3 @@ static t_stack	*create_stack_node(int array)
 	new->prev = NULL;
 	return (new);
 }
-
-// int	pop(t_stack *stack)
-// {
-// 	t_node	*temps;
-// 	int	value;
-	
-// 	if(stack->size == 0)
-// 		return (-1);//verifier le numero d'erreur;
-// 	temps = stack->top;
-// 	free(stack->top);
-// 	value = temps->value;
-// 	stack->top = temps->next;
-// 	//free(temps);
-// 	stack->size--;
-// 	return (value);
-// }

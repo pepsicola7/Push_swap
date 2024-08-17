@@ -6,14 +6,13 @@
 /*   By: peli <peli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 14:13:30 by peli              #+#    #+#             */
-/*   Updated: 2024/08/14 20:08:18 by peli             ###   ########.fr       */
+/*   Updated: 2024/08/17 18:07:08 by peli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 static void free_args(char **args);
-//static void	print_stack(t_stack *stack);
 
 int	*create_array(int len, char **argv)
 {
@@ -75,9 +74,9 @@ int main(int argc, char **argv)
 	fill_stack(&a, array, len);
 	if (len == 3)
 		trier_trois(&a);
-	if (len == 5)
-		trier_cinq(&a, &b);
-	if (len > 5)
+	else if (len == 5)
+		trier_cinq(&a, &b,len);
+	else if (len > 5)
 		multitrier(&a, &b, len);
 	// printf("Stack A :\n");
 	// print_stack(a);
@@ -122,26 +121,11 @@ int main(int argc, char **argv)
 	*/
 
 	free(array);
-	free_stack(a,len);
-	// free_stack(b);
+	free_stack(a);
+	free_stack(b);
 	return (0);
 }
 
-// static void	print_stack(t_stack *stack)static void free_stack(t_stack *stack, int len)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	if (!stack)
-// 		return;
-// 	while (stack)
-// 	{
-// 		printf("i%d Stack est : %d\n", i, stack->value);
-// 		stack = stack->next;
-// 		i++;
-// 	}
-// 	return;
-// }
 static void free_args(char **args)
 {
 	int	i;
@@ -154,20 +138,56 @@ static void free_args(char **args)
 	}
 	free(args);
 }
-void	free_stack(t_stack *stack, int len)
+
+// void free_stack(t_stack *stack)
+// {
+//     t_stack *current;
+//     t_stack *next;
+
+//     if (!stack)
+//         return;
+
+//     current = stack;
+//     do
+//     {
+//         next = current->next;
+//         free(current);
+//         current = next;
+//     } while (current != stack);
+// }
+
+// void	free_stack(t_stack **stack)
+// {
+// 	t_stack	*next;
+
+// 	if (!stack)
+// 		return ;
+// 	while (*stack)
+// 	{
+// 		next = (*stack)->next;
+// 		free(*stack);
+// 		*stack = next;
+// 	}
+// 	return ;
+// }
+
+void	free_stack(t_stack *stack)
 {
 	t_stack	*current;
 	t_stack	*next;
-	int	i;
 
+	if (!stack)
+		return;
+	printf("stack pos %d\n", (stack)->value);
 	current = stack;
-	i = 0;
-	while (i < len)
+	next = current->next;
+	free(current);
+	current = next;
+	while (current != stack)
 	{
 		next = current->next;
 		free(current);
 		current = next;
-		i++;
 	}
 	return ;
 }

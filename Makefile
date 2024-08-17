@@ -1,6 +1,6 @@
 NAME = push_swap
 CC = cc
-FLAGS = -Wall -Werror -Wextra -fsanitize=address -g
+FLAGS = -Wall -Werror -Wextra -g3 -fsanitize=address -g
 RM = rm -rf
 LIBFTPATH = ./libft/
 INSTRUCTION_DIR = Instruction

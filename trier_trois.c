@@ -6,7 +6,7 @@
 /*   By: peli <peli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 17:43:37 by peli              #+#    #+#             */
-/*   Updated: 2024/08/13 20:36:14 by peli             ###   ########.fr       */
+/*   Updated: 2024/08/17 17:30:36 by peli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,13 @@
 
 void	trier_trois(t_stack **a)
 {
-	int	first = (*a)->value;
-	int	second = (*a)->next->value;
-	int	third = (*a)->next->next->value;
+	int	first;
+	int	second;
+	int	third;
 	
+	first = (*a)->value;
+	second = (*a)->next->value;
+	third = (*a)->prev->value;
 	if (first < second && second > third && first < third)
 	{
 		ft_swap_a(a);
@@ -25,7 +28,7 @@ void	trier_trois(t_stack **a)
 	}
 	else if (second < first && first < third && second < third)
 		ft_swap_a(a);
-	else if (first < second && first > third && second >third)
+	else if (first < second && first > third && second > third)
 		ft_reverse_rotate_a(a);
 	else if (first > second && second > third && first > third)
 	{
