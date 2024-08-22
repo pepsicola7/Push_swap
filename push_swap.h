@@ -6,7 +6,7 @@
 /*   By: peli <peli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 14:14:04 by peli              #+#    #+#             */
-/*   Updated: 2024/08/17 18:10:51 by peli             ###   ########.fr       */
+/*   Updated: 2024/08/22 13:19:09 by peli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_stack
 	int				value;
 	struct s_stack	*next;
 	struct s_stack	*prev;
+	
 }	t_stack;
 
 int		check_error(int len, char **args);
@@ -43,10 +44,12 @@ char	ft_reverse_rotate(t_stack **stack);
 void	ft_reverse_rotate_a(t_stack **stack);
 void	ft_reverse_rotate_b(t_stack **stack);
 void	ft_reverse_rotate_ab(t_stack **a, t_stack **b);
-void	print_stack(t_stack *stack);
+void	print_stack(t_stack *stack, int len);
 void	trier_trois(t_stack **a);
 int		find_min(t_stack *stack, int len);
 void	trier_cinq(t_stack **a, t_stack **b, int len);
 void	multitrier(t_stack **a, t_stack **b, int len);
+int		find_position(t_stack *a, t_stack *b, int lena);
+int		find_max(t_stack *stack, int len);
 void	free_stack(t_stack *stack);
 #endif

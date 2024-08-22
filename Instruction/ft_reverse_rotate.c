@@ -6,18 +6,48 @@
 /*   By: peli <peli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 16:06:28 by peli              #+#    #+#             */
-/*   Updated: 2024/08/17 16:29:23 by peli             ###   ########.fr       */
+/*   Updated: 2024/08/22 13:20:05 by peli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
 char ft_reverse_rotate(t_stack **stack)
-{	
+{
+	// delete last and insert it at the end
+	// or
+	// make a boolean in the struct and put it on true for the start of the stack
+
+	t_stack *start = *stack;
+	printf("LA STACKKKK avant\n");
+	while (1)
+	{
+		printf("%d\n", (*stack)->value);
+		*stack = (*stack)->next;
+		if (*stack == start)
+			break;
+	}
+	printf("\n");
 	if (!stack || !(*stack) || (*stack)->next == *stack) 
 		return (Failure);
+
 	*stack = (*stack)->prev;
-	//*stack = last;
+	1 2 3
+	3 1 2
+	
+	printf("JE SUIS LA : %d\n", (*stack)->value);
+	start = *stack;
+	printf("LA STACKKKK apres\n");
+	while (1)
+	{
+		printf("%d\n", (*stack)->value);
+		*stack = (*stack)->next;
+		if (*stack == start)
+			break;
+	}
+	printf("\n");
+	printf("LAST OF A : %d\n", ((*stack)->prev)->value);
+	printf("LAST OF A actual : %d\n", ((*stack))->value);
 	return (Success);
 }
 

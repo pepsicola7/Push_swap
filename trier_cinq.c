@@ -6,7 +6,7 @@
 /*   By: peli <peli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 11:06:25 by peli              #+#    #+#             */
-/*   Updated: 2024/08/17 18:13:10 by peli             ###   ########.fr       */
+/*   Updated: 2024/08/22 12:37:31 by peli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,25 @@
 int	find_min(t_stack *stack, int len)
 {
 	int	min;
-	int i;
+	(void)(len);
+	//int i;
+	t_stack *start = stack;
 
-	if (len <= 0 || !stack)
+	//if (len <= 0 || !stack)
+	//	return INT_MAX;
+	if (!stack)
 		return INT_MAX;
-	i = 0;
+	//i = 0;
 	min = stack->value;
-	while (i < len && stack)
+	stack = stack->next;
+	while (stack != start)
 	{
 		if (min > stack->value)
 			min = stack->value;
 		stack = stack->next;
-		i++;
+		//if (stack == start) // On a fait un tour complet
+          //  break;
+		//i++;
 	}
 	return (min);
 }
@@ -34,20 +41,24 @@ int	find_min(t_stack *stack, int len)
 void	trier_cinq(t_stack **a, t_stack **b, int len)
 {
 	int	min;
-
+	int	i;
+	
+	i = 0;
 	if (!a || !*a || len < 1)
 		return;
 	min = find_min(*a, len);
 	while ((*a)->value != min)
 	{
-		ft_rotate_a(a);
+		i++;
+		if (i > 2)
+			ft_reverse_rotate_a(a);
+		else
+			ft_rotate_a(a);
 	}
 	ft_push_b(b, a);
 	min = find_min(*a,len - 1);
 	while ((*a)->value != min)
-	{
 		ft_rotate_a(a);
-	}
 	ft_push_b(b, a);
 	trier_trois(a);
 	ft_push_a(a, b);

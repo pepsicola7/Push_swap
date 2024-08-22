@@ -6,7 +6,7 @@
 /*   By: peli <peli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 17:26:57 by peli              #+#    #+#             */
-/*   Updated: 2024/08/17 18:07:04 by peli             ###   ########.fr       */
+/*   Updated: 2024/08/18 11:54:21 by peli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	fill_stack(t_stack **stack, int *array, int len)
 	}
 	current->next = *stack;// ou = head ici; verifier a la fin;
 	(*stack)->prev = current;
-	printf("stack0 is : %d\n", (*stack)->value);
+	//printf("stack0 is : %d\n", (*stack)->value);
 	return ;
 }
 

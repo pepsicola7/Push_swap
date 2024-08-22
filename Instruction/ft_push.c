@@ -6,7 +6,7 @@
 /*   By: peli <peli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 14:17:49 by peli              #+#    #+#             */
-/*   Updated: 2024/08/17 19:36:59 by peli             ###   ########.fr       */
+/*   Updated: 2024/08/22 12:55:11 by peli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_push_a(t_stack **a, t_stack **b)
 
 	if(!*b)
 		return;
-
+	printf("LAST OF A : %d\n", ((*a)->prev)->value);
 	temps = *b;
 	if (*b == (*b)->next)
 		*b = NULL;
@@ -43,6 +43,7 @@ void	ft_push_a(t_stack **a, t_stack **b)
 		*a = temps;
 	}
 	printf("pa\n");
+	return;
 }
 
 void	ft_push_b(t_stack **b, t_stack **a)
@@ -51,10 +52,7 @@ void	ft_push_b(t_stack **b, t_stack **a)
 
 	if (!*a)
 		return;
-
 	temp = *a;
-
-	// Si a ne contient qu'un seul élément
 	if (*a == (*a)->next)
 		*a = NULL;
 	else
@@ -63,8 +61,6 @@ void	ft_push_b(t_stack **b, t_stack **a)
 		(*a)->next->prev = (*a)->prev;
 		*a = (*a)->next;
 	}
-
-	// Si b est vide
 	if (!*b)
 	{
 		*b = temp;
@@ -81,6 +77,7 @@ void	ft_push_b(t_stack **b, t_stack **a)
 	}
 
 	printf("pb\n");
+	return;
 }
 
 

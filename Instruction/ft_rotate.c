@@ -6,7 +6,7 @@
 /*   By: peli <peli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 15:41:03 by peli              #+#    #+#             */
-/*   Updated: 2024/08/17 16:28:33 by peli             ###   ########.fr       */
+/*   Updated: 2024/08/19 18:38:45 by peli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,6 @@ char ft_rotate(t_stack **stack)
 	if (!*stack || (*stack)->next == *stack)
 		return (Failure);
 	*stack = (*stack)->next;
-	
-    // old_head = *stack;
-    // new_head = old_head->next;
-    // tail = old_head->prev;
-
-    // // Update links to rotate the list
-    // tail->next = old_head;    // Tail's next points to the old head
-    // old_head->prev = tail;    // Old head's prev points to the tail
-    // old_head->next = new_head; // Old head's next points to the new head
-    // new_head->prev = old_head; // New head's prev points to the old head
-
-    // // Update the stack's head to the new head
-    // *stack = new_head;
-
     return (Success);
 }
 

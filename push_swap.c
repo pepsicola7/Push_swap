@@ -6,7 +6,7 @@
 /*   By: peli <peli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 14:13:30 by peli              #+#    #+#             */
-/*   Updated: 2024/08/17 18:07:08 by peli             ###   ########.fr       */
+/*   Updated: 2024/08/21 18:34:43 by peli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,12 @@ int main(int argc, char **argv)
 		trier_trois(&a);
 	else if (len == 5)
 		trier_cinq(&a, &b,len);
-	else if (len > 5)
+	else
 		multitrier(&a, &b, len);
-	// printf("Stack A :\n");
-	// print_stack(a);
-	// printf("\nStack B :\n");
-	// print_stack(b);
+	printf("Stack A :\n");
+	print_stack(a, len);
+	printf("\nStack B :\n");
+	print_stack(b, len);
 	
 	//printf("min is : %d\n", find_min(a));
 
@@ -178,7 +178,7 @@ void	free_stack(t_stack *stack)
 
 	if (!stack)
 		return;
-	printf("stack pos %d\n", (stack)->value);
+	//printf("stack pos %d\n", (stack)->value);
 	current = stack;
 	next = current->next;
 	free(current);
