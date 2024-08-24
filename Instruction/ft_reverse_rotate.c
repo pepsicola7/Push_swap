@@ -6,11 +6,25 @@
 /*   By: peli <peli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 16:06:28 by peli              #+#    #+#             */
-/*   Updated: 2024/08/22 13:20:05 by peli             ###   ########.fr       */
+/*   Updated: 2024/08/23 18:19:00 by peli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
+
+// char ft_reverse_rotate(t_stack **stack)
+// {
+// 	t_stack *first;
+// 	t_stack *last;
+
+// 	first = (*stack);
+// 	last = (*stack)->prev;
+// 	if (!stack || !(*stack) || (*stack)->next == *stack) 
+// 		return (Failure);
+// 	(*stack) = last;
+// 	(*stack)->next = first;
+// 	return (Success);
+// }
 
 char ft_reverse_rotate(t_stack **stack)
 {
@@ -19,35 +33,29 @@ char ft_reverse_rotate(t_stack **stack)
 	// make a boolean in the struct and put it on true for the start of the stack
 
 	t_stack *start = *stack;
-	printf("LA STACKKKK avant\n");
+	// printf("LA STACKKKK avant\n");
 	while (1)
 	{
-		printf("%d\n", (*stack)->value);
+		// printf("%d\n", (*stack)->value);
 		*stack = (*stack)->next;
 		if (*stack == start)
 			break;
 	}
-	printf("\n");
 	if (!stack || !(*stack) || (*stack)->next == *stack) 
 		return (Failure);
 
 	*stack = (*stack)->prev;
-	1 2 3
-	3 1 2
 	
-	printf("JE SUIS LA : %d\n", (*stack)->value);
+	// printf("JE SUIS LA : %d\n", (*stack)->value);
 	start = *stack;
-	printf("LA STACKKKK apres\n");
+	// printf("LA STACKKKK apres\n");
 	while (1)
 	{
-		printf("%d\n", (*stack)->value);
+		// printf("%d\n", (*stack)->value);
 		*stack = (*stack)->next;
 		if (*stack == start)
 			break;
 	}
-	printf("\n");
-	printf("LAST OF A : %d\n", ((*stack)->prev)->value);
-	printf("LAST OF A actual : %d\n", ((*stack))->value);
 	return (Success);
 }
 

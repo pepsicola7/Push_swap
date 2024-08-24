@@ -6,7 +6,7 @@
 /*   By: peli <peli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 14:13:30 by peli              #+#    #+#             */
-/*   Updated: 2024/08/21 18:34:43 by peli             ###   ########.fr       */
+/*   Updated: 2024/08/24 14:48:08 by peli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,22 @@ int main(int argc, char **argv)
 	b = NULL;
 	
 	fill_stack(&a, array, len);
+
+	// printf("Stack A :\n");
+	// print_stack(a);
+	// printf("Stack B :\n");
+	// print_stack(b);
+	// ft_push_b(&b, &a);
+	// printf("Stack A :\n");
+	// print_stack(a);
+	// printf("Stack B :\n");
+	// print_stack(b);
+	// ft_push_a(&a, &b);
+	// printf("Stack A :\n");
+	// print_stack(a);
+	// printf("Stack B :\n");
+	// print_stack(b);
+	// ft_push_a(&a, &b);
 	if (len == 3)
 		trier_trois(&a);
 	else if (len == 5)
@@ -79,9 +95,9 @@ int main(int argc, char **argv)
 	else
 		multitrier(&a, &b, len);
 	printf("Stack A :\n");
-	print_stack(a, len);
+	print_stack(a);
 	printf("\nStack B :\n");
-	print_stack(b, len);
+	print_stack(b);
 	
 	//printf("min is : %d\n", find_min(a));
 

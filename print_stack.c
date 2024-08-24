@@ -1,18 +1,34 @@
 #include "push_swap.h"
 
-void	print_stack(t_stack *stack, int len)
+void	print_stack(t_stack *stack)
 {
-	int	i;
+	t_stack	*start;
 
-	i = 0;
 	if (!stack)
 		return;
-	while (len > 0)
+	start = stack;
+	printf("Stack est : Value:%d Next:%d Prev:%d\n", stack->value, stack->next->value, stack->prev->value);
+	stack = stack->next;
+	while (stack != start)
 	{
-		printf("i%d Stack est : %d\n", i, stack->value);
+		printf("Stack est : Value:%d Next:%d Prev:%d\n", stack->value, stack->next->value, stack->prev->value);
 		stack = stack->next;
-		i++;
-		len--;
 	}
 	return;
 }
+// void	print_stack(t_stack *stack, int len)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	if (!stack)
+// 		return;
+// 	while (len > 0)
+// 	{
+// 		printf("i%d Stack est : %d %d %d\n", i, stack->value, stack->next->value, stack->prev->value);
+// 		stack = stack->next;
+// 		i++;
+// 		len--;
+// 	}
+// 	return;
+// }

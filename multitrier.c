@@ -6,30 +6,11 @@
 /*   By: peli <peli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 11:03:44 by peli              #+#    #+#             */
-/*   Updated: 2024/08/22 13:04:54 by peli             ###   ########.fr       */
+/*   Updated: 2024/08/24 16:55:29 by peli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-// int	find_min(t_stack *stack, int len)
-// {
-// 	int	min;
-// 	int i;
-
-// 	if (len <= 0 || !stack)
-// 		return INT_MAX;
-// 	i = 0;
-// 	min = stack->value;
-// 	while (i < len && stack)
-// 	{
-// 		if (min > stack->value)
-// 			min = stack->value;
-// 		stack = stack->next;
-// 		i++;
-// 	}
-// 	return (min);
-// }
 
 int	find_max(t_stack *stack, int len)
 {
@@ -71,19 +52,9 @@ int	find_position(t_stack *a, t_stack *b, int lena)
 	temps = a;
 	min = find_min(temps, lena);
 	max = find_max(temps, lena);
-
 	if (!a)
 		return (0);
-
-	if (b->value < min)
-	{
-		while (temps->value != min)
-		{
-			temps = temps->next;
-			position++;
-		}
-	}
-	else if (b->value > max)
+	if (b->value < min || b->value > max)
 	{
 		while (temps->value != min)
 		{
@@ -100,52 +71,48 @@ int	find_position(t_stack *a, t_stack *b, int lena)
 				position++;
 				temps = temps->next;
 			}
-				printf ("aaaaaaaposition is : %d\n", position);
-				fflush(stdout);
 		}
 		else
 		{
 			while (b->value < temps->prev->value)
 			{
 				position++;
-				position = lena - position;
 				temps = temps->prev;
 			}
+			position = lena - position;
 		}
 	}
 	return(position);
 }
-
-	// printf("im here\n");
-	// if (temps->value > temps->prev->value && b->value < temps->value && b->value > temps->prev->value)
-	// 	return (0); // quand on va inserer une chiffre < min ou > max;on que push 0 position;
-	// printf("im here\n");
-	// if (temps->value < temps->prev->value && (b->value > temps->prev->value || b->value < temps->value))
-	// 	return (0);
-	// printf("im here\n");
-	// // printf ("position is : %d\n", position);
-	// // fflush(stdout);
-	// if(b->value < temps->value)
-	// {
-		
-	// 	// while (temps->value < temps->next->value)
-	// 	// {
-	// 	// 	temps = temps->prev;
-	// 	// 	position--;  // ici position faut - 1
-	// 	// }
-	// 	printf ("aaaaaaaposition is : %d\n", position);
-	// 	fflush(stdout);
-	// 	return (position + lena + 1);
-	// }
-	// else
-	// {
-	// 	while (temps->value < temps->next->value)
-	// 	{
-	// 		temps = temps->next;
-	// 		position++;
-	// 	}
-	// }
 	
+void	ft_triera(t_stack **a, int len)
+{
+	int	min;
+	int position;
+	t_stack	*temps;
+
+	min = find_min(*a, len);
+	temps = *a;
+	position = 0;
+	while (temps->value != min)
+	{
+		temps = temps->next;
+		position++;
+	}
+	if(position > len/2)
+	{
+		while ((*a)->value != min)
+			ft_reverse_rotate_a(a);
+	}
+	else
+	{
+		while ((*a)->value != min)
+			ft_rotate_a(a);
+	}
+	return;
+}
+
+
 void	multitrier(t_stack **a, t_stack **b, int len)
 {
 	int	lena;
@@ -159,20 +126,12 @@ void	multitrier(t_stack **a, t_stack **b, int len)
 		i++;	
 	}
 	trier_trois(a);
-	lena = 3; 
-	printf("Stack A :\n");
-	print_stack(*a, lena);
-	printf("\nStack B :\n");
-	print_stack(*b, len - lena);
+	lena = 3;
 	while (*b)
 	{
-		position = find_position (*a, *b, lena); //ici est la positiond de b  dans le pile a;
-		printf ("position is : %d\n", position);
-		fflush(stdout);
-		if (position <= lena / 2)
+		position = find_position (*a, *b, lena);
+		if (position < lena / 2)
 		{
-			// printf ("position is : %d\n", position);
-			// fflush(stdout);
 			while (position > 0)
 			{
 				ft_rotate_a(a);
@@ -181,8 +140,6 @@ void	multitrier(t_stack **a, t_stack **b, int len)
 		}
 		else
 		{
-			// printf ("position is : %d\n", position);
-			// fflush(stdout);
 			position = lena - position;
 			while (position > 0)
 			{
@@ -190,34 +147,15 @@ void	multitrier(t_stack **a, t_stack **b, int len)
 				position--;
 			}
 		}
-		printf("Stack A :\n");
-		print_stack(*a, lena);
-		printf("\nStack B :\n");
-		print_stack(*b, len - lena);
+	
 		ft_push_a(a, b);
 		lena++;
-		printf("Stack A :\n");
-		t_stack *start = *a;
-		while (1)
-		{
-			printf("i%d Stack est : %d\n", i, (*a)->value);
-			(*a) = (*a)->next;
-			if (*a == start)
-				break;
-		}
-		//print_stack(*a, lena);
-		printf("\nStack B :\n");
-		//print_stack(*b, len - lena);
-		start = *b;
-		while (1 && *b)
-		{
-			printf("i%d Stack est : %d\n", i, (*b)->value);
-			(*b) = (*b)->next;
-			if (*b == start)
-				break;
-		}
-		
+		// printf("Stack A :\n");
+		// print_stack(*a);
+		// printf("\nStack B :\n");
+		// print_stack(*b);
 	}
+	ft_triera(a,lena);
 	return ;
 }
 
@@ -264,7 +202,7 @@ void	multitrier(t_stack **a, t_stack **b, int len)
 	
 	// while (i < len / 2)
 	// {
-	// 	if((*a)->value = )
+	// 	if((*a)->value = )char ft_rotate(t_stack **stack)
 	// 	i++;
 	// }
 	// *b = NULL;
