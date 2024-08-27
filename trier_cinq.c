@@ -6,17 +6,15 @@
 /*   By: peli <peli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 11:06:25 by peli              #+#    #+#             */
-/*   Updated: 2024/08/22 12:37:31 by peli             ###   ########.fr       */
+/*   Updated: 2024/08/25 17:53:40 by peli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	find_min(t_stack *stack, int len)
+int	find_min(t_stack *stack)
 {
 	int	min;
-	(void)(len);
-	//int i;
 	t_stack *start = stack;
 
 	//if (len <= 0 || !stack)
@@ -46,7 +44,7 @@ void	trier_cinq(t_stack **a, t_stack **b, int len)
 	i = 0;
 	if (!a || !*a || len < 1)
 		return;
-	min = find_min(*a, len);
+	min = find_min(*a);
 	while ((*a)->value != min)
 	{
 		i++;
@@ -56,7 +54,7 @@ void	trier_cinq(t_stack **a, t_stack **b, int len)
 			ft_rotate_a(a);
 	}
 	ft_push_b(b, a);
-	min = find_min(*a,len - 1);
+	min = find_min(*a);
 	while ((*a)->value != min)
 		ft_rotate_a(a);
 	ft_push_b(b, a);
@@ -65,51 +63,3 @@ void	trier_cinq(t_stack **a, t_stack **b, int len)
 	ft_push_a(a, b);
 	return;
 }
-
-// A : 3 2 1 4 5  B :
-// A : 1 4 5 3 2  B :
-// A : 4 5 3 2    B : 1
-
-
-// t_stack *left = *stack;
-// t_stack *right = (*stack)->prev;
-// while (1)
-// {
-// 	if (left->value == min)
-// 		break;
-// 	else (right->value == min)
-// 		break;
-// 	left = left->next;
-// 	right = right->prev;
-// }
-
-// if (left->value == min)
-// {
-// 	while (*stack != min)
-// 		ra
-
-
-		
-// }
-// else if (right->value == min)
-// {
-// 	while (*stack != min)
-// 		rra
-// }
-
-// i = 0;
-// while((*a)->value != min) {
-// 	++i;
-// }
-
-// if (i < len / 2)
-// 	ra
-// else
-// 	rra
-
-// 20
-// while (array[i] != value)
-// 	i++;
-
-// O(n)
-// O(n/2)
