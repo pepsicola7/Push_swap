@@ -6,7 +6,7 @@
 /*   By: peli <peli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 11:03:44 by peli              #+#    #+#             */
-/*   Updated: 2024/08/27 18:08:00 by peli             ###   ########.fr       */
+/*   Updated: 2024/08/28 11:09:11 by peli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,14 +128,16 @@ int ft_howmany_coup(t_stack *a, t_stack *b, int len_itself)
 			rotatetime = len_itself -rotatetime;
         }
     }
+	// printf ("totate time : %d\n", rotatetime);
     return rotatetime; // Return the number of rotations needed
 }
 
 void	execute_individual_moves(t_stack **a, t_stack **b, int position_a, int position_b, int lena, int lenb)
 {
 	while (position_a > 0 || position_b > 0) 
-	{
-		if (position_a > 0) 
+	{	
+		// printf("ooooooooooooooooooooooooo\n");
+		if (position_a > 0 && position_a != lena) 
 		{
 			if (position_a <= lena / 2) 
 			{
@@ -147,15 +149,14 @@ void	execute_individual_moves(t_stack **a, t_stack **b, int position_a, int posi
 			} 
 			else 
 			{
-				position_a = lena - position_a;
-				while (position_a != 0)
+				while (position_a != lena)
 				{
 					ft_reverse_rotate_a(a);
-					position_a--;
+					position_a++;
 				}
 			}
 		}
-		if (position_b > 0) 
+		if (position_b > 0 && position_b != lenb) 
 		{
 			if (position_b <= lenb / 2) 
 			{
@@ -167,14 +168,14 @@ void	execute_individual_moves(t_stack **a, t_stack **b, int position_a, int posi
 			} 
 			else 
 			{
-				position_b = lenb - position_b;
-				while (position_b != 0)
+				while (position_b != lenb)
 				{
 					ft_reverse_rotate_b(b);
-					position_b--;
+					position_b++;
 				}
 			}
 		}
+		break;
 	}
 }
 
@@ -184,6 +185,10 @@ void execute_optimized_moves(t_stack **a, t_stack **b, int position_a, int posit
 {
 	while (position_a > 0 && position_b > 0) 
 	{
+		// printf ("position_a is : %d\n", position_a);
+		// printf ("position_b is : %d\n", position_b);
+		// printf ("lena is : %d\n", lena);
+		// printf ("lenb is : %d\n", lenb);
 		if (position_a <= lena / 2 && position_b <= lenb / 2) 
 		{
 			while(position_a != 0 && position_b != 0)
@@ -196,18 +201,23 @@ void execute_optimized_moves(t_stack **a, t_stack **b, int position_a, int posit
 		} 
 		else if (position_a > lena / 2 && position_b > lenb / 2) 
 		{
-			while (position_a != 0 && position_b != 0)
+			while (position_a != lena && position_b != lenb)
 			{
 				ft_reverse_rotate_ab(a, b);
-				position_a--;
-				position_b--;
+				position_a++;
+				position_b++;
 			}
+			break;
 		} 
 		else 
 		{
 			break;
 		}
 	}
+	// printf("!Stack A :\n");
+	// print_stack(*a);
+	// printf("\n!Stack B :\n");
+	// print_stack(*b);
 	execute_individual_moves(a, b, position_a, position_b, lena, lenb);
 }
 
@@ -222,12 +232,17 @@ int	ft_where_stack(t_stack *a, t_stack *push)
 	temps = a;
 	if (!a || !push)
 		return -1;
+	// printf ("temps id :\n");
+	// print_stack(temps);
 	while (temps)
 	{
 		if (temps->value == push->value)
 			return i;
 		temps = temps->next;
 		i++;
+		// printf ("temps id :\n");
+		// print_stack(temps);
+		// printf ("Last position a is: %d\n", i);
 	}
 	return (-1);
 }
@@ -287,32 +302,44 @@ void multitrier(t_stack **a, t_stack **b, int len)
 		ft_push_b(b, a);
     len_a = len - 2;
     len_b = 2;
-    while (*a)//len_a > len / 3
+    while (len_a > 3)//len_a > len / 3
     {
+		// printf("??Stack A :\n");
+		// print_stack(*a);
+		// printf("\nStack B :\n");
+		// print_stack(*b);	
 		push = ft_pickyou(a, b, len_a, len_b);
-		// printf ("push is : %d", push->value);
+		// printf ("push is : %d\n", push->value);
 		position_a = ft_where_stack(*a, push);
 		position_b = ft_howmany_coup(push, *b, len_b);
 		// printf ("position a is : %d\n", position_a);
 		// printf ("position b  is : %d\n", position_b);
 		// Check if rotations are needed
-		if (position_a > 0 || position_b > 0)
-			execute_optimized_moves(a, b, position_a, position_b, len_a, len_b);
-		else
-			execute_individual_moves(a, b, position_a, position_b, len_a, len_b);
+		// if ((position_a > 0 || position_b > 0) && (position_a != len_a && position_b != len_b))
+		// {
+		execute_optimized_moves(a, b, position_a, position_b, len_a, len_b);
+		// }
+		// else
+		// 	execute_individual_moves(a, b, position_a, position_b, len_a, len_b);
 		ft_push_b(b, a);
 		len_a--;
 		len_b++;
+		// printf("??Stack A :\n");
+		// print_stack(*a);
+		// printf("\nStack B :\n");
+		// print_stack(*b);	
 	}
 	len_b = len - len_a;
-	// Move elements back from b to a
-	// printf("Stack A :\n");
+	trier_trois(a);
+	//Move elements back from b to a
+	// printf("ooooooooooooooooooooooooo\n");
+	// printf("??Stack A :\n");
 	// print_stack(*a);
 	// printf("\nStack B :\n");
 	// print_stack(*b);
 	while (*b)
 	{
-		// printf("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n");
+		//  printf("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n");
 		push = ft_pickyou(b, a, len_b, len_a);
 		// printf("push b to a est :\n");
 		// print_stack(push);
@@ -332,13 +359,13 @@ void multitrier(t_stack **a, t_stack **b, int len)
 		ft_push_a(a, b);
 		len_a++;
 		len_b--;
-		// printf("Stack A :\n");
-		// print_stack(*a);
-		// printf("\nStack B :\n");
-		// print_stack(*b);
 		// printf ("ooooooooooooooooo\n");
 	}
 	ft_triera(a, len);
+	// printf("Stack A :\n");
+	// print_stack(*a);
+	// printf("\nStack B :\n");
+	// print_stack(*b);
 	return;
 }
 
@@ -965,3 +992,9 @@ void	ft_triera(t_stack **a, int len)
 	// 	right = right->next;
 	// 	i++;
 	// }
+
+
+
+
+
+	

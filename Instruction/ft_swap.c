@@ -6,7 +6,7 @@
 /*   By: peli <peli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 13:53:43 by peli              #+#    #+#             */
-/*   Updated: 2024/08/23 21:24:46 by peli             ###   ########.fr       */
+/*   Updated: 2024/08/28 09:36:13 by peli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,8 @@ char	ft_swap(t_stack **stack)
 }
 void	ft_swap_a(t_stack **stack)
 {
-	printf("Stack A :\n");
-	print_stack(*stack);
 	if (ft_swap(stack) == Success)
 		printf ("sa\n");
-	printf("Stack A :\n");
-	print_stack(*stack);
 	return;
 }
 
