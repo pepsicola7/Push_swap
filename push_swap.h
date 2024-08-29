@@ -6,7 +6,7 @@
 /*   By: peli <peli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 14:14:04 by peli              #+#    #+#             */
-/*   Updated: 2024/08/27 16:48:46 by peli             ###   ########.fr       */
+/*   Updated: 2024/08/29 20:40:15 by peli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ t_stack	*ft_pickyou(t_stack **a, t_stack **b, int len_a, int len_b);
 void	multitrier(t_stack **a, t_stack **b, int len);
 //int		whereisposition(t_stack *stack, int value);
 void	ft_triera(t_stack **a, int len);
+void	ft_trierb(t_stack **b, int len);
 // void		handle_individual_rotations(t_stack **a, t_stack **b, int *position_a, int *position_b, int lena, int lenb);
 // void		finalize_sort(t_stack **a, int lena);
 // int		find_insert_position(t_stack *a, int value, int lena);

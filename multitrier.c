@@ -6,7 +6,7 @@
 /*   By: peli <peli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 11:03:44 by peli              #+#    #+#             */
-/*   Updated: 2024/08/28 11:09:11 by peli             ###   ########.fr       */
+/*   Updated: 2024/08/29 20:41:46 by peli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,18 +100,19 @@ int ft_howmany_coup(t_stack *a, t_stack *b, int len_itself)
     // Case 1: If the value in 'a' is smaller than the minimum or larger than the maximum in 'b'
     if (a->value < min || a->value > max)
     {
-        // Rotate until the minimum value is on top of 'b'
+		// Rotate until the minimum value is on top of 'b'
         while (temps->value != min)
         {
             temps = temps->next;
             rotatetime++;
         }
+		rotatetime++;
     }
     else
     {
-        if (a->value > temps->value)
+        if (a->value < temps->value)
         {
-            while (a->value > temps->value)
+            while (a->value < temps->value)
             {
                 rotatetime++;
                 temps = temps->next;
@@ -119,7 +120,7 @@ int ft_howmany_coup(t_stack *a, t_stack *b, int len_itself)
         }
         else
         {
-            while (a->value < temps->prev->value)
+            while (a->value > temps->prev->value)
             {
                 rotatetime++;
                 temps = temps->prev;
@@ -283,6 +284,40 @@ t_stack	*ft_pickyou(t_stack **a, t_stack **b, int len_a, int len_b)
     }
 	return (push);
 }
+
+void	ft_trierb(t_stack **b, int len)
+{
+	int		max;
+	int		position;
+	t_stack	*temp;
+
+	max = find_max(*b);
+	temp = *b;
+	position = 0;
+
+	// Trouver la position du maximum dans la pile
+	while (temp->value != max)
+	{
+		temp = temp->next;
+		position++;
+	}
+
+	// Si le maximum est plus proche de la fin de la pile, faire des reverse rotate
+	if (position > len / 2)
+	{
+		while ((*b)->value != max)
+			ft_reverse_rotate_b(b);
+	}
+	// Sinon, faire des rotate pour amener le maximum en haut
+	else
+	{
+		while ((*b)->value != max)
+			ft_rotate_b(b);
+	}
+	return;
+}
+
+
 void multitrier(t_stack **a, t_stack **b, int len)
 {
     int len_a;
@@ -292,7 +327,12 @@ void multitrier(t_stack **a, t_stack **b, int len)
 	t_stack	*push;
 
     len_a = len;
+	int max_b = find_max(*a);
+	if((*a)->value == max_b)
+		ft_rotate_a(a);
     ft_push_b(b, a);
+	// if((*a)->value == max_b)
+	// ft_rotate_a(a);
     if ((*a)->value < (*b)->value) 
 	{
         ft_push_b(b, a);
@@ -302,7 +342,7 @@ void multitrier(t_stack **a, t_stack **b, int len)
 		ft_push_b(b, a);
     len_a = len - 2;
     len_b = 2;
-    while (len_a > 3)//len_a > len / 3
+    while (len_a > 0)//len_a > len / 3
     {
 		// printf("??Stack A :\n");
 		// print_stack(*a);
@@ -329,39 +369,42 @@ void multitrier(t_stack **a, t_stack **b, int len)
 		// printf("\nStack B :\n");
 		// print_stack(*b);	
 	}
-	len_b = len - len_a;
-	trier_trois(a);
+	// len_b = len - len_a;
 	//Move elements back from b to a
 	// printf("ooooooooooooooooooooooooo\n");
 	// printf("??Stack A :\n");
 	// print_stack(*a);
 	// printf("\nStack B :\n");
 	// print_stack(*b);
+	// while (*b)
+	// {
+	// 	//  printf("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n");
+	// 	push = ft_pickyou(b, a, len_b, len_a);
+	// 	// printf("push b to a est :\n");
+	// 	// print_stack(push);
+	// 	position_b = ft_where_stack(*b, push);
+	// 	position_a = ft_howmany_coup(push, *a, len_a);
+	// 	// printf ("\nposition b is : %d\n", position_a);
+	// 	// printf ("position a  is : %d\n", position_b);
+	// 	// Check if rotations are needed
+	// 	if (position_b > 0 || position_a > 0)
+	// 	{
+	// 		execute_optimized_moves(a, b, position_a, position_b, len_a, len_b);
+	// 	}
+	// 	else
+	// 	{
+	// 		execute_individual_moves(a, b, position_a, position_b, len_a, len_b);
+	// 	}
+	ft_trierb(b,len);
 	while (*b)
 	{
-		//  printf("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA\n");
-		push = ft_pickyou(b, a, len_b, len_a);
-		// printf("push b to a est :\n");
-		// print_stack(push);
-		position_b = ft_where_stack(*b, push);
-		position_a = ft_howmany_coup(push, *a, len_a);
-		// printf ("\nposition b is : %d\n", position_a);
-		// printf ("position a  is : %d\n", position_b);
-		// Check if rotations are needed
-		if (position_b > 0 || position_a > 0)
-		{
-			execute_optimized_moves(a, b, position_a, position_b, len_a, len_b);
-		}
-		else
-		{
-			execute_individual_moves(a, b, position_a, position_b, len_a, len_b);
-		}
 		ft_push_a(a, b);
-		len_a++;
-		len_b--;
-		// printf ("ooooooooooooooooo\n");
 	}
-	ft_triera(a, len);
+	// 	len_a++;
+	// 	len_b--;
+	// 	// printf ("ooooooooooooooooo\n");
+	// }
+	// ft_triera(a, len);
 	// printf("Stack A :\n");
 	// print_stack(*a);
 	// printf("\nStack B :\n");
