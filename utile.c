@@ -1,30 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_stack.c                                      :+:      :+:    :+:   */
+/*   utile.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: peli <peli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/31 11:22:44 by peli              #+#    #+#             */
-/*   Updated: 2024/08/31 13:32:53 by peli             ###   ########.fr       */
+/*   Created: 2024/08/31 11:19:03 by peli              #+#    #+#             */
+/*   Updated: 2024/08/31 11:24:21 by peli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	print_stack(t_stack *stack)
+int	find_min(t_stack *stack)
 {
-	t_stack	*start;
+	int	min;
+	t_stack *start = stack;
 
 	if (!stack)
-		return;
-	start = stack;
-	//printf("Stack est : Value:%d Next:%d Prev:%d\n", stack->value, stack->next->value, stack->prev->value);
+		return INT_MAX;
+	min = stack->value;
 	stack = stack->next;
 	while (stack != start)
 	{
-		//printf("Stack est : Value:%d Next:%d Prev:%d\n", stack->value, stack->next->value, stack->prev->value);
+		if (min > stack->value)
+			min = stack->value;
 		stack = stack->next;
 	}
-	return;
+	return (min);
+}
+
+int	find_max(t_stack *stack)
+{
+	int	max;
+	t_stack *start = stack;
+
+	if (!stack)
+		return INT_MIN;
+	max = stack->value;
+	stack = stack->next;
+	while (stack != start)
+	{
+		if (max < stack->value)
+			max = stack->value;
+		stack = stack->next;
+	}
+	return (max);
 }
