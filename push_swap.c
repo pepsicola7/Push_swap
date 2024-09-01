@@ -6,21 +6,21 @@
 /*   By: peli <peli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 14:13:30 by peli              #+#    #+#             */
-/*   Updated: 2024/08/31 13:35:59 by peli             ###   ########.fr       */
+/*   Updated: 2024/09/01 17:41:30 by peli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void free_args(char **args);
+static void	free_args(char **args);
 
 int	*create_array(int len, char **argv)
 {
 	int	*array;
 	int	i;
-	
+
 	if (check_error(len, argv) == 0)
-		return(0);
+		return (0);
 	else
 	{
 		i = 0;
@@ -31,12 +31,14 @@ int	*create_array(int len, char **argv)
 			i++;
 		}
 	}
-	return (array); 
+	return (array);
 }
+
 int	*process_args(int argc, char **argv, int *len)
 {
 	char	**args;
 	int		*array;
+
 	if (argc == 2)
 	{
 		args = ft_split(argv[1], ' ');
@@ -59,12 +61,12 @@ int	*process_args(int argc, char **argv, int *len)
 	return (array);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	int		*array;
 	int		len;
-	t_stack *a;
-	t_stack *b;
+	t_stack	*a;
+	t_stack	*b;
 
 	if (argc < 2)
 		return (0);
@@ -76,22 +78,15 @@ int main(int argc, char **argv)
 	}
 	fill_stack(&a, array, len);
 	if (is_sorted(a, array))
-		return(0);
+		return (0);
 	if (len <= 5)
 		tiny_trier(&a, &b, len);
 	else
 		multitrier(&a, &b, len);
-	// printf("Stack A :\n");
-	// print_stack(a);
-	// printf("\nStack B :\n");
-	// print_stack(b);
-	free(array);
-	free_stack(a);
-	free_stack(b);
 	return (0);
 }
 
-static void free_args(char **args)
+static void	free_args(char **args)
 {
 	int	i;
 
@@ -110,7 +105,7 @@ void	free_stack(t_stack *stack)
 	t_stack	*next;
 
 	if (!stack)
-		return;
+		return ;
 	current = stack;
 	next = current->next;
 	free(current);

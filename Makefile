@@ -5,18 +5,21 @@ RM = rm -rf
 LIBFTPATH = ./libft/
 INSTRUCTION_DIR = Instruction
 PARSING_DIR = Parsing
+TRIER_DIR = Trier
 
 SRCS =	push_swap.c \
 		$(PARSING_DIR)/check_error.c \
 		$(PARSING_DIR)/fill_stack.c \
-		print_stack.c \
 		$(INSTRUCTION_DIR)/ft_swap.c\
 		$(INSTRUCTION_DIR)/ft_push.c\
 		$(INSTRUCTION_DIR)/ft_rotate.c\
 		$(INSTRUCTION_DIR)/ft_reverse_rotate.c\
-		utile.c\
-		Tiny_trier.c\
-		multitrier.c 
+		$(TRIER_DIR)/Tiny_trier.c\
+		$(TRIER_DIR)/multitrier.c\
+		$(TRIER_DIR)/optimisation.c\
+		$(TRIER_DIR)/cheapest_back.c\
+		$(TRIER_DIR)/cheapest_go.c\
+		$(TRIER_DIR)/utile.c
 
 OBJS = $(SRCS:.c=.o)
 LIBFTMAKE	= $(MAKE) -C $(LIBFTPATH)

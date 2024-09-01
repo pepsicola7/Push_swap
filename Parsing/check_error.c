@@ -6,16 +6,16 @@
 /*   By: peli <peli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 19:36:11 by peli              #+#    #+#             */
-/*   Updated: 2024/08/31 12:03:19 by peli             ###   ########.fr       */
+/*   Updated: 2024/09/01 18:35:11 by peli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
 static long	ft_atol(const char *nptr);
-static int ft_isnumber(char *str);
-static int ft_strcmp(char *s1, char *s2);
-static int ft_multiduplicate(char **str, int count);
+static int	ft_isnumber(char *str);
+static int	ft_strcmp(char *s1, char *s2);
+static int	ft_multiduplicate(char **str, int count);
 
 int	check_error(int len, char **args)
 {
@@ -41,12 +41,12 @@ int	check_error(int len, char **args)
 
 static long	ft_atol(const char *nptr)
 {
-	int	sign;
+	int		sign;
 	long	result;
 
 	result = 0;
 	sign = 1;
-	if(ft_strlen(nptr) > 11)
+	if (ft_strlen(nptr) > 11)
 		return ((long)INT_MAX + 1);
 	while ((*nptr >= 9 && *nptr <= 13) || (*nptr == 32))
 		nptr++;
@@ -64,9 +64,9 @@ static long	ft_atol(const char *nptr)
 	return (result * sign);
 }
 
-static int ft_isnumber(char *str)
+static int	ft_isnumber(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (str[i] == '\0')
@@ -75,18 +75,18 @@ static int ft_isnumber(char *str)
 		i++;
 	while (str[i] != '\0')
 	{
-		if(ft_isdigit(str[i]) == 0)
+		if (ft_isdigit(str[i]) == 0)
 			return (0);
 		i++;
 	}
 	if (ft_atol(str) > INT_MAX || ft_atol(str) < INT_MIN)
-		return(0);
+		return (0);
 	return (1);
 }
 
-static int ft_strcmp(char *s1, char *s2)
+static int	ft_strcmp(char *s1, char *s2)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (s1[i] || s2[i])
@@ -98,10 +98,10 @@ static int ft_strcmp(char *s1, char *s2)
 	return (0);
 }
 
-static int ft_multiduplicate(char **str, int count)
+static int	ft_multiduplicate(char **str, int count)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (i < count - 1)

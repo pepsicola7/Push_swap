@@ -6,7 +6,7 @@
 /*   By: peli <peli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 13:53:43 by peli              #+#    #+#             */
-/*   Updated: 2024/08/31 11:49:38 by peli             ###   ########.fr       */
+/*   Updated: 2024/09/01 18:28:45 by peli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,37 +14,37 @@
 
 char	ft_swap(t_stack **stack)
 {
-	if (!*stack)
-		return (Failure);
 	t_stack	*second;
 	t_stack	*first;
+	int		temp;
 
+	if (!*stack)
+		return (FAILURE);
 	second = *stack;
 	first = (*stack)->next;
-	
-	int temp = first->value;
+	temp = first->value;
 	first->value = second->value;
 	second->value = temp;
-	
-	return(Success);
+	return (SUCCESS);
 }
+
 void	ft_swap_a(t_stack **stack)
 {
-	if (ft_swap(stack) == Success)
+	if (ft_swap(stack) == SUCCESS)
 		write (1, "sa\n", 3);
-	return;
+	return ;
 }
 
 void	ft_swap_b(t_stack **stack)
 {
-	if (ft_swap(stack) == Success)
+	if (ft_swap(stack) == SUCCESS)
 		write (1, "sb\n", 3);
-	return;
+	return ;
 }
 
 void	ft_swap_ab(t_stack **a, t_stack **b)
 {
-	if (ft_swap(a) == Success && ft_swap(b) == Success)
+	if (ft_swap(a) == SUCCESS && ft_swap(b) == SUCCESS)
 		write (1, "ss\n", 3);
-	return;
+	return ;
 }
