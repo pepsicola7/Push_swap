@@ -6,7 +6,7 @@
 /*   By: peli <peli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 17:26:57 by peli              #+#    #+#             */
-/*   Updated: 2024/09/01 17:37:51 by peli             ###   ########.fr       */
+/*   Updated: 2024/09/10 12:54:15 by peli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	fill_stack(t_stack **stack, int *array, int len)
 	initialize_stack(stack);
 }
 
-int	is_sorted(t_stack *a, int *array)
+int	is_sorted(t_stack *a)
 {
 	t_stack	*start;
 
@@ -71,8 +71,6 @@ int	is_sorted(t_stack *a, int *array)
 			return (0);
 		a = a->next;
 	}
-	free(array);
-	free_stack(a);
 	return (1);
 }
 

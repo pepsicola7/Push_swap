@@ -6,7 +6,7 @@
 /*   By: peli <peli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 17:02:22 by peli              #+#    #+#             */
-/*   Updated: 2024/05/15 16:32:26 by peli             ###   ########.fr       */
+/*   Updated: 2024/09/09 20:13:43 by peli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,11 @@ int	ft_atoi(const char *nptr)
 	result = 0;
 	sign = 1;
 	while ((*nptr >= 9 && *nptr <= 13) || (*nptr == 32))
-	{
 		nptr++;
-	}
 	if (*nptr == '-' || *nptr == '+')
 	{
 		if (*nptr == '-')
-		{
 			sign = -1;
-		}
 		nptr++;
 	}
 	while (*nptr >= '0' && *nptr <= '9')

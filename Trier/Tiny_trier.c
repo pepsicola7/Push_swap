@@ -6,7 +6,7 @@
 /*   By: peli <peli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 11:20:36 by peli              #+#    #+#             */
-/*   Updated: 2024/09/01 18:53:32 by peli             ###   ########.fr       */
+/*   Updated: 2024/09/10 11:40:23 by peli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,29 +79,29 @@ void	trier_quatre(t_stack **a, t_stack **b, int len)
 
 void	trier_cinq(t_stack **a, t_stack **b, int len)
 {
-	int	min;
-	int	i;
+	t_peiqi	malade;
 
-	i = 0;
-	min = find_min(*a);
-	if (!a || !*a || len < 1)
-		return ;
-	while ((*a)->value != min)
+	malade.len_b = 0;
+	malade.mi = find_min_(*a, INT_MAX);
+	malade.mi2 = find_min_(*a, malade.mi);
+	while (len > 3)
 	{
-		i++;
-		if (i > 2)
+		while ((*a)->value == malade.mi || (*a)->value == malade.mi2)
+		{
+			ft_push_b(b, a);
+			malade.len_b++;
+			len--;
+		}
+		if ((*a)->prev->value == malade.mi || (*a)->prev->value == malade.mi2)
 			ft_reverse_rotate_a(a);
 		else
 			ft_rotate_a(a);
 	}
-	ft_push_b(b, a);
-	min = find_min(*a);
-	while ((*a)->value != min)
-		ft_rotate_a(a);
-	ft_push_b(b, a);
 	trier_trois(a);
-	ft_push_a(a, b);
-	ft_push_a(a, b);
+	if (malade.len_b >= 2 && (*b)->value < (*b)->next->value)
+		ft_swap_b(b);
+	while (malade.len_b-- > 0)
+		ft_push_a(a, b);
 	return ;
 }
 

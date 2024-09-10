@@ -6,7 +6,7 @@
 /*   By: peli <peli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 16:06:28 by peli              #+#    #+#             */
-/*   Updated: 2024/09/01 18:33:28 by peli             ###   ########.fr       */
+/*   Updated: 2024/09/10 13:29:34 by peli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ char	ft_reverse_rotate(t_stack **stack)
 {
 	t_stack	*start;
 
+	if (!stack || !(*stack) || (*stack)->next == *stack)
+		return (FAILURE);
 	start = *stack;
 	while (1)
 	{
@@ -23,8 +25,6 @@ char	ft_reverse_rotate(t_stack **stack)
 		if (*stack == start)
 			break ;
 	}
-	if (!stack || !(*stack) || (*stack)->next == *stack)
-		return (FAILURE);
 	*stack = (*stack)->prev;
 	start = *stack;
 	while (1)

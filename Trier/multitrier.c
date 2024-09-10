@@ -6,7 +6,7 @@
 /*   By: peli <peli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 11:03:44 by peli              #+#    #+#             */
-/*   Updated: 2024/09/01 18:53:21 by peli             ###   ########.fr       */
+/*   Updated: 2024/09/10 11:39:27 by peli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 static void	ft_pretrier(t_stack**a, t_stack **b);
 static void	multitrier_initial(t_stack **a, t_stack **b, int *len_pos, int len);
 static void	multitrier_final(t_stack **a, t_stack **b, int *len_pos);
+static void	trier_cent(t_stack **a, t_stack **b, int *len_pos, int len);
 
 static void	ft_pretrier(t_stack**a, t_stack **b)
 {
@@ -52,7 +53,6 @@ static void	multitrier_initial(t_stack **a, t_stack **b, int *len_pos, int len)
 		len_pos[LEN_B]++;
 	}
 	trier_cinq(a, b, 5);
-	ft_trierb(b, len);
 }
 
 void	multitrier_final(t_stack **a, t_stack **b, int *len_pos)
@@ -72,6 +72,28 @@ void	multitrier_final(t_stack **a, t_stack **b, int *len_pos)
 	ft_triera(a, len_pos[LEN_A]);
 }
 
+static void	trier_cent(t_stack **a, t_stack **b, int *len_pos, int len)
+{
+	t_stack	*push;
+
+	ft_pretrier(a, b);
+	len_pos[LEN_A] = len - 2;
+	len_pos[LEN_B] = 2;
+	while (len_pos[LEN_A] > 0)
+	{
+		push = ft_pickyou(a, b, len_pos[LEN_A], len_pos[LEN_B]);
+		len_pos[POS_A] = ft_where_stack(*a, push);
+		len_pos[POS_B] = howmany_coup(push, *b, len_pos[LEN_B]);
+		execute_optimized_moves(a, b, len_pos);
+		ft_push_b(b, a);
+		len_pos[LEN_A]--;
+		len_pos[LEN_B]++;
+	}
+	ft_trierb(b, len);
+	while (*b)
+		ft_push_a(a, b);
+}
+
 void	multitrier(t_stack **a, t_stack **b, int len)
 {
 	int	*len_pos;
@@ -79,8 +101,13 @@ void	multitrier(t_stack **a, t_stack **b, int len)
 	len_pos = (int *)malloc(4 * sizeof(int));
 	if (!len_pos)
 		return ;
-	multitrier_initial(a, b, len_pos, len);
-	multitrier_final(a, b, len_pos);
+	if (len <= 200)
+		trier_cent(a, b, len_pos, len);
+	else
+	{
+		multitrier_initial(a, b, len_pos, len);
+		multitrier_final(a, b, len_pos);
+	}
 	free(len_pos);
 	return ;
 }

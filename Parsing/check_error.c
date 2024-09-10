@@ -6,7 +6,7 @@
 /*   By: peli <peli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 19:36:11 by peli              #+#    #+#             */
-/*   Updated: 2024/09/01 18:35:11 by peli             ###   ########.fr       */
+/*   Updated: 2024/09/09 20:44:18 by peli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,43 @@
 
 static long	ft_atol(const char *nptr);
 static int	ft_isnumber(char *str);
-static int	ft_strcmp(char *s1, char *s2);
-static int	ft_multiduplicate(char **str, int count);
 
 int	check_error(int len, char **args)
 {
-	int	i;
+	int		i;
+	long	temp;
+	int		*tmp;
 
 	if (!len)
 		return (0);
 	i = 0;
+	temp = 0;
+	tmp = malloc(sizeof(int) * len);
 	while (args[i])
 	{
 		if (ft_isnumber(args[i]) == 0)
-		{
-			return (0);
-		}
+			return (free(tmp), 0);
+		temp = ft_atol(args[i]);
+		if ((temp == (long)INT_MAX + 1) || ft_multiduplicate(tmp, i, temp))
+			return (free(tmp), 0);
+		tmp[i] = (int)temp;
 		i++;
 	}
-	if (ft_multiduplicate(args, len) == 0)
+	return (free(tmp), 1);
+}
+
+int	ft_multiduplicate(int *tab, int i, int data)
+{
+	int	j;
+
+	j = 0;
+	while (j < i)
 	{
-		return (0);
+		if (tab[j] == data)
+			return (1);
+		j++;
 	}
-	return (1);
+	return (0);
 }
 
 static long	ft_atol(const char *nptr)
@@ -56,6 +70,8 @@ static long	ft_atol(const char *nptr)
 			sign = -1;
 		nptr++;
 	}
+	if (!(*nptr >= '0' && *nptr <= '9'))
+		return ((long)INT_MAX + 1);
 	while (*nptr >= '0' && *nptr <= '9')
 	{
 		result = result * 10 + ((*nptr - 48) % 10);
@@ -71,7 +87,7 @@ static int	ft_isnumber(char *str)
 	i = 0;
 	if (str[i] == '\0')
 		return (0);
-	if (str[i] == '-')
+	if (str[i] == '-' || str[i] == '+')
 		i++;
 	while (str[i] != '\0')
 	{
@@ -81,39 +97,5 @@ static int	ft_isnumber(char *str)
 	}
 	if (ft_atol(str) > INT_MAX || ft_atol(str) < INT_MIN)
 		return (0);
-	return (1);
-}
-
-static int	ft_strcmp(char *s1, char *s2)
-{
-	int	i;
-
-	i = 0;
-	while (s1[i] || s2[i])
-	{
-		if (s1[i] != s2[i])
-			return (s1[i] - s2[i]);
-		i++;
-	}
-	return (0);
-}
-
-static int	ft_multiduplicate(char **str, int count)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < count - 1)
-	{
-		j = i + 1;
-		while (j < count)
-		{
-			if (ft_strcmp(str[i], str[j]) == 0)
-				return (0);
-			j++;
-		}
-		i++;
-	}
 	return (1);
 }
